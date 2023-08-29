@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Typography, Row, Col } from "antd";
 import BuildingsList from "./BuildingsList";
 import Filters from "./Filters";

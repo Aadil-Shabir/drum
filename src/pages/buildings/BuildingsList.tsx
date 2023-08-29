@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Typography, Spin, List } from "antd";
 import { Link } from "react-router-dom";
 
@@ -36,6 +36,7 @@ const BuildingsList: React.FC<BuildingsListProps> = ({ data, setData, isLoading,
             }
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

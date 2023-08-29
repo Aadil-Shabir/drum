@@ -34,6 +34,7 @@ const BuildingDetails: React.FC = () => {
             }
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -64,6 +65,7 @@ const BuildingDetails: React.FC = () => {
             }
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const certificates = [
@@ -176,8 +178,6 @@ const BuildingDetails: React.FC = () => {
               value: item["indicative-cost"],
           }))
         : [];
-
-    console.log({ building });
 
     return (
         <div>
