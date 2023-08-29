@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Root from "./Root";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Buildings, BuildingDetail } from "./pages";
+import { Buildings, BuildingDetail, Signin } from "./pages";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
     {
         path: "/buildingdetail/:buildingId",
         element: <BuildingDetail />,
+    },
+    {
+        path: "/signin",
+        element: <Signin />,
     },
 ]);
 

@@ -94,7 +94,7 @@ const Filters: React.FC<FilterProps> = ({ data, setData, isLoading, setIsLoading
             values.certificateLodgementDateFromMonth || "4"
         }&to-year=${values.certificateLodgementDateToYear || "2023"}&to-month=${
             values.certificateLodgementDateToMonth || "12"
-        }&size=1000`;
+        }&size=35000`;
 
         // Check if propertyType is an array with values
         if (values.propertyType && values.propertyType.length > 0) {
@@ -192,7 +192,7 @@ const Filters: React.FC<FilterProps> = ({ data, setData, isLoading, setIsLoading
                     <Form.Item name="localAuthority" style={{ margin: 0 }}>
                         <Select
                             options={localAuthorities.map((item, index) => ({
-                                value: item.description,
+                                value: item.code,
                                 label: item.description,
                             }))}
                             style={{ width: "100%" }}
@@ -206,7 +206,7 @@ const Filters: React.FC<FilterProps> = ({ data, setData, isLoading, setIsLoading
                     <Form.Item name="constituency" style={{ margin: 0 }}>
                         <Select
                             options={constituencies.map((item, index) => ({
-                                value: item.description,
+                                value: item.code,
                                 label: item.description,
                             }))}
                             style={{ width: "100%" }}
