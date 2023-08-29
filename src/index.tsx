@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Root from "./Root";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Buildings, BuildingDetail, Signin } from "./pages";
+import { Buildings, BuildingDetail } from "./pages";
+import { AuthContextProvider } from "./store/AuthContext";
 
 const router = createBrowserRouter([
     {
@@ -18,15 +19,13 @@ const router = createBrowserRouter([
         path: "/buildingdetail/:buildingId",
         element: <BuildingDetail />,
     },
-    {
-        path: "/signin",
-        element: <Signin />,
-    },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthContextProvider>
+            <RouterProvider router={router} />
+        </AuthContextProvider>
     </React.StrictMode>
 );
