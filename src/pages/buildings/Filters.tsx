@@ -242,26 +242,31 @@ const Filters: React.FC<FilterProps> = ({ data, setData, isLoading, setIsLoading
                 </Form.Item>
                 <FilterTitle>Current Energy Rating</FilterTitle>
                 {currentEnergyRatingOptions.map((option, index) => (
-                    <Form.Item
-                        name={`currentEnergyRating${index}`}
-                        valuePropName="checked"
-                        style={{ margin: "0.25rem 0rem" }}
-                        key={index}
-                    >
-                        <Checkbox
-                            style={{
-                                background: option.color,
-                                padding: "0.25rem 0.5rem",
-                                margin: 0,
-                                width: option.Width,
-                            }}
-                            value={option.text2}
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <Form.Item
+                            name={`currentEnergyRating${index}`}
+                            valuePropName="checked"
+                            style={{ margin: "0.25rem 0rem", width: "100%" }}
+                            key={index}
                         >
-                            <Typography.Title style={{ margin: 0 }} level={5}>
-                                {option.text1}
-                            </Typography.Title>
-                        </Checkbox>
-                    </Form.Item>
+                            <Checkbox
+                                style={{
+                                    background: option.color,
+                                    padding: "0.25rem 0.5rem",
+                                    margin: 0,
+                                    width: option.Width,
+                                }}
+                                value={option.text2}
+                            >
+                                <Typography.Title style={{ margin: 0 }} level={5}>
+                                    {option.text1}
+                                </Typography.Title>
+                            </Checkbox>
+                        </Form.Item>
+                        <Typography.Title style={{ margin: 0, color: "black", textTransform: "capitalize" }} level={5}>
+                            {option.text2}
+                        </Typography.Title>
+                    </div>
                 ))}
                 <FilterTitle>CERTIFICATE LODGEMENT DATE</FilterTitle>
                 <Space direction="vertical" style={{ width: "100%", margin: "0.5rem 0rem" }} size="small">

@@ -18,7 +18,7 @@ const BuildingsList: React.FC<BuildingsListProps> = ({ data, setData, isLoading,
         const fetchData = async () => {
             try {
                 setIsLoading(true);
-                fetch("https://epc.opendatacommunities.org/api/v1/domestic/search?size=100&from=100", {
+                fetch("https://epc.opendatacommunities.org/api/v1/domestic/search?size=5000&from=5000", {
                     method: "GET",
                     headers: {
                         Accept: "application/json",

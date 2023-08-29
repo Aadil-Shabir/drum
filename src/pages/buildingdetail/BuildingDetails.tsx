@@ -3,6 +3,8 @@ import { Spin, Typography } from "antd";
 import { useParams } from "react-router-dom";
 import Title from "../../components/Title";
 import DetailList from "./DetailList";
+import axios from "axios";
+import DomesticEPC from "./DomesticEPC";
 
 const BuildingDetails: React.FC = () => {
     let { buildingId } = useParams();
@@ -38,19 +40,25 @@ const BuildingDetails: React.FC = () => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
-                fetch(`https://epc.opendatacommunities.org/api/v1/domestic/recommendations/${buildingId}`, {
-                    method: "GET",
-                    headers: {
-                        Accept: "application/json",
-                        Authorization:
-                            "Basic YWFkaWwuc2hhYmlyMTNAZ21haWwuY29tOjE2Y2E3MzAxZGM4ZjBmZDYzNzBlMTlhMjU0YWIyMGQxMmRjMGViYTU=",
-                    },
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        setRecommendations(data.rows);
-                        setIsLoading(false);
-                    });
+                const response = await axios.get(
+                    `https://epc.opendatacommunities.org/api/v1/domestic/recommendations/${buildingId}`,
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            Authorization:
+                                "Basic YWFkaWwuc2hhYmlyMTNAZ21haWwuY29tOjE2Y2E3MzAxZGM4ZjBmZDYzNzBlMTlhMjU0YWIyMGQxMmRjMGViYTU=",
+                        },
+                    }
+                );
+
+                if (response.status === 404) {
+                    console.log("Resource not found");
+                } else if (response.data.rows.length > 0) {
+                    setRecommendations(response.data.rows);
+                } else {
+                    console.log("Error fetching data");
+                }
+                setIsLoading(false);
             } catch (err) {
                 console.log(err);
             }
@@ -162,12 +170,14 @@ const BuildingDetails: React.FC = () => {
         { name: "UPRN SOURCE", value: building && building["uprn-source"] },
     ];
 
-    const recommends =
-        recommendations &&
-        recommendations.map((item: any) => ({
-            name: `${item["improvement-id-text"]} - ${item["improvement-descr-text"]}`,
-            value: item["indicative-cost"],
-        }));
+    const recommends = recommendations
+        ? recommendations.map((item: any) => ({
+              name: `${item["improvement-id-text"]} - ${item["improvement-descr-text"]}`,
+              value: item["indicative-cost"],
+          }))
+        : [];
+
+    console.log({ building });
 
     return (
         <div>
@@ -180,6 +190,8 @@ const BuildingDetails: React.FC = () => {
                     <Typography.Title level={2} style={{ margin: "0.25rem 0rem", fontWeight: "bold" }}>
                         {building && building.address}
                     </Typography.Title>
+                    <Title>Domestic EPC</Title>
+                    <DomesticEPC building={building} />
                     <Title>Certificate Details</Title>
                     <DetailList list={certificates} />
                     <Title>Location</Title>
